@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TwoNet - Professionelle IT-Infrastruktur und sichere Netzwerklösungen">
     <title>TwoNet - Vernetzt. Sicher. Einfach.</title>
     <style>
         * {
@@ -20,11 +21,16 @@
             --text-gray: #94a3b8;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: var(--text-light);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         /* Navigation */
@@ -37,6 +43,7 @@
             padding: 1rem 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .nav-container {
@@ -60,12 +67,11 @@
             background: white;
             padding: 0.5rem 1rem;
             border-radius: 12px;
+            transition: transform 0.3s ease;
         }
 
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
+        .logo-img:hover {
+            transform: scale(1.05);
         }
 
         .nav-links {
@@ -79,10 +85,46 @@
             text-decoration: none;
             transition: color 0.3s;
             font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--accent-cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+            border-radius: 2px;
         }
 
         /* Hero Section */
@@ -131,25 +173,39 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero .tagline {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             color: var(--text-gray);
             margin-bottom: 2rem;
             letter-spacing: 2px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--text-gray);
             margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .cta-button {
@@ -162,11 +218,16 @@
             font-weight: bold;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
         }
 
         /* Services Section */
@@ -178,14 +239,14 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 2.5rem);
             margin-bottom: 3rem;
             color: var(--text-light);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
@@ -195,17 +256,19 @@
             padding: 2rem;
             border-radius: 24px;
             border: 1px solid rgba(59, 130, 246, 0.2);
-            transition: transform 0.3s, border-color 0.3s;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
             border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2);
         }
 
         .service-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            display: block;
         }
 
         .service-card h3 {
@@ -216,6 +279,7 @@
 
         .service-card p {
             color: var(--text-gray);
+            line-height: 1.8;
         }
 
         /* Features Section */
@@ -231,7 +295,7 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -239,12 +303,18 @@
         .feature-item {
             text-align: center;
             padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
         }
 
         .feature-item .icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--accent-blue);
+            display: block;
         }
 
         .feature-item h4 {
@@ -266,6 +336,12 @@
             text-align: center;
         }
 
+        .contact > p {
+            margin-bottom: 2rem;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
         .contact-info {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -278,15 +354,32 @@
             background: rgba(42, 53, 68, 0.6);
             border-radius: 20px;
             border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
         }
 
         .contact-item h4 {
             color: var(--accent-cyan);
             margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         .contact-item p {
             color: var(--text-gray);
+        }
+
+        .contact-item a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-cyan);
         }
 
         /* Footer */
@@ -303,21 +396,58 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.2rem;
-            }
-
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(26, 35, 50, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
             }
 
             .services-grid,
             .features-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .services,
+            .features,
+            .contact {
+                padding: 3rem 1rem;
             }
         }
     </style>
@@ -329,6 +459,11 @@
             <div class="logo">
                 <img src="data:image/svg+xml,%3Csvg viewBox='0 0 1200 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231a2332' stroke-width='28' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='14' y='14' width='130' height='130' rx='20' ry='20'/%3E%3Crect x='85' y='85' width='130' height='130' rx='20' ry='20'/%3E%3Cpath d='M 80,80 Q 95,95 110,115 Q 125,135 140,150' stroke-width='26'/%3E%3Cellipse cx='110' cy='115' rx='10' ry='14' fill='%231a2332' stroke='none'/%3E%3C/g%3E%3Ctext x='260' y='180' font-family='Arial' font-size='140' font-weight='700' fill='%231a2332'%3ETwoNet%3C/text%3E%3C/svg%3E" alt="TwoNet Logo" class="logo-img">
             </div>
+            <button class="menu-toggle" aria-label="Navigation öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
@@ -353,32 +488,32 @@
         <h2 class="section-title">Unsere Services</h2>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">🔒</div>
+                <span class="service-icon" role="img" aria-label="Sicherheit">🔒</span>
                 <h3>Sichere Netzwerke</h3>
                 <p>Implementierung hochsicherer Netzwerkarchitekturen mit modernsten Verschlüsselungstechnologien und Zugriffskontrollen.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">☁️</div>
+                <span class="service-icon" role="img" aria-label="Cloud">☁️</span>
                 <h3>Cloud Solutions</h3>
                 <p>Maßgeschneiderte Cloud-Infrastrukturen für maximale Flexibilität, Skalierbarkeit und Kosteneffizienz Ihres Unternehmens.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">🛡️</div>
+                <span class="service-icon" role="img" aria-label="Schutzschild">🛡️</span>
                 <h3>IT-Security</h3>
                 <p>Umfassende Sicherheitslösungen zum Schutz Ihrer Daten und Systeme vor Cyberbedrohungen und Angriffen.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">⚙️</div>
+                <span class="service-icon" role="img" aria-label="Einstellungen">⚙️</span>
                 <h3>Managed Services</h3>
                 <p>Professionelle Verwaltung und Wartung Ihrer IT-Infrastruktur für reibungslose Geschäftsprozesse.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">📊</div>
+                <span class="service-icon" role="img" aria-label="Diagramm">📊</span>
                 <h3>Monitoring</h3>
                 <p>24/7 Überwachung Ihrer Systeme mit proaktivem Management und sofortiger Reaktion bei Problemen.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">🔧</div>
+                <span class="service-icon" role="img" aria-label="Werkzeug">🔧</span>
                 <h3>Beratung</h3>
                 <p>Expertenberatung für optimale IT-Strategien und digitale Transformation Ihres Unternehmens.</p>
             </div>
@@ -391,22 +526,22 @@
             <h2 class="section-title">Warum TwoNet?</h2>
             <div class="features-grid">
                 <div class="feature-item">
-                    <div class="icon">⚡</div>
+                    <span class="icon" role="img" aria-label="Blitz">⚡</span>
                     <h4>Schnell</h4>
                     <p>Hochperformante Lösungen für maximale Effizienz</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon">🔐</div>
+                    <span class="icon" role="img" aria-label="Schloss">🔐</span>
                     <h4>Sicher</h4>
                     <p>Höchste Sicherheitsstandards für Ihre Daten</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon">💡</div>
+                    <span class="icon" role="img" aria-label="Glühbirne">💡</span>
                     <h4>Innovativ</h4>
                     <p>Modernste Technologien und Best Practices</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon">🤝</div>
+                    <span class="icon" role="img" aria-label="Handschlag">🤝</span>
                     <h4>Zuverlässig</h4>
                     <p>24/7 Support und garantierte Verfügbarkeit</p>
                 </div>
@@ -420,16 +555,12 @@
         <p>Haben Sie Fragen oder möchten Sie mehr über unsere Services erfahren? Wir sind für Sie da!</p>
         <div class="contact-info">
             <div class="contact-item">
-                <h4>📧 Email</h4>
-                <p>info@twonet.ch</p>
+                <h4><span role="img" aria-label="Email">📧</span> Email</h4>
+                <p><a href="mailto:info@twonet.ch">info@twonet.ch</a></p>
             </div>
             <div class="contact-item">
-                <h4>📞 Telefon</h4>
-                <p>+41 XX XXX XX XX</p>
-            </div>
-            <div class="contact-item">
-                <h4>📍 Adresse</h4>
-                <p>Kriens, Luzern</p>
+                <h4><span role="img" aria-label="Standort">📍</span> Adresse</h4>
+                <p>6300 Zug</p>
             </div>
         </div>
     </section>
@@ -438,5 +569,32 @@
     <footer>
         <p>&copy; 2026 TwoNet. Alle Rechte vorbehalten.</p>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav')) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
