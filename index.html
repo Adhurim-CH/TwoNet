@@ -5,110 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="TwoNet - Professionelle IT-Infrastruktur und sichere Netzwerklösungen">
     <title>TwoNet - Wir haben IT im Griff</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary-dark: #1a2332;
-            --secondary-dark: #2a3544;
-            --accent-blue: #3b82f6;
-            --accent-cyan: #06b6d4;
-            --text-light: #e2e8f0;
-            --text-gray: #94a3b8;
+            --bg:        #080d16;
+            --bg-2:      #0d1525;
+            --bg-card:   #111927;
+            --border:    rgba(255,255,255,0.07);
+            --border-hover: rgba(6,182,212,0.4);
+            --blue:      #3b82f6;
+            --cyan:      #06b6d4;
+            --cyan-dim:  rgba(6,182,212,0.12);
+            --white:     #f1f5f9;
+            --muted:     #64748b;
+            --muted-2:   #94a3b8;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: var(--text-light);
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--white);
             line-height: 1.6;
             min-height: 100vh;
         }
 
-        /* Navigation */
+        /* NAV */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(26, 35, 50, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            padding: 0 2rem;
         }
 
-        .nav-container {
+        .nav-inner {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            margin: 18px auto 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
+            background: rgba(8,13,22,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            height: 58px;
+            padding: 0 1.25rem 0 1rem;
         }
 
         .logo-img {
-            height: 50px;
+            height: 36px;
             width: auto;
             background: white;
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo-img:hover {
-            transform: scale(1.05);
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 0;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: var(--muted-2);
             text-decoration: none;
-            transition: color 0.3s;
+            font-size: 0.875rem;
             font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-cyan);
-            transition: width 0.3s ease;
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px;
+            transition: color 0.2s, background 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--accent-cyan);
+            color: var(--white);
+            background: rgba(255,255,255,0.05);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-cta {
+            background: var(--cyan-dim) !important;
+            border: 1px solid rgba(6,182,212,0.25);
+            color: var(--cyan) !important;
+            margin-left: 0.5rem;
         }
 
-        /* Mobile Menu Button */
+        .nav-cta:hover {
+            background: rgba(6,182,212,0.22) !important;
+            color: var(--cyan) !important;
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -120,479 +112,771 @@
         }
 
         .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-light);
-            transition: all 0.3s ease;
+            width: 22px; height: 2px;
+            background: var(--muted-2);
+            transition: all 0.3s;
             border-radius: 2px;
+            display: block;
         }
 
-        /* Hero Section */
+        /* HERO */
         .hero {
-            margin-top: 80px;
-            min-height: 90vh;
+            position: relative;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+            overflow: hidden;
+        }
+
+        #network-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-mask {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                linear-gradient(to bottom,
+                    rgba(8,13,22,0.65) 0%,
+                    rgba(8,13,22,0.1) 25%,
+                    rgba(8,13,22,0.1) 65%,
+                    rgba(8,13,22,0.85) 100%
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
             padding: 2rem;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--cyan);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: var(--cyan-dim);
+            border: 1px solid rgba(6,182,212,0.22);
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--cyan);
+            border-radius: 50%;
+            animation: blink 2s ease infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.25; }
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.7s ease 0.1s both;
+            text-shadow:
+                0 0 60px rgba(8,13,22,0.95),
+                0 2px 30px rgba(8,13,22,0.95),
+                0 0 120px rgba(8,13,22,0.7);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 60%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--muted-2);
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.75;
+            animation: fadeUp 0.7s ease 0.2s both;
+            text-shadow: 0 1px 30px rgba(8,13,22,1), 0 0 60px rgba(8,13,22,1);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.7s ease 0.3s both;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 32px rgba(59,130,246,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(59,130,246,0.45);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.85rem 2rem;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--muted-2);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            border-color: rgba(255,255,255,0.18);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* STATS */
+        .stats-bar {
+            background: var(--bg-2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+        }
+
+        .stats-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-num span { color: var(--cyan); }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.3rem;
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 7rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--cyan);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.9rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.025em;
+            margin-bottom: 0.9rem;
+            line-height: 1.1;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 460px;
+            margin-bottom: 4rem;
+            line-height: 1.75;
+            font-weight: 300;
+        }
+
+        /* SERVICES GRID */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: 2.25rem;
+            position: relative;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.25s;
+            cursor: default;
+        }
+
+        .service-card:nth-child(3n) { border-right: none; }
+        .service-card:nth-child(n+4) { border-bottom: none; }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(6,182,212,0.07), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card:hover { background: #131e2f; }
+        .service-card:hover::before { opacity: 1; }
+
+        .service-icon-wrap {
+            width: 44px; height: 44px;
+            background: var(--cyan-dim);
+            border: 1px solid rgba(6,182,212,0.18);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1.4rem;
+            transition: background 0.25s, border-color 0.25s;
+        }
+
+        .service-card:hover .service-icon-wrap {
+            background: rgba(6,182,212,0.18);
+            border-color: rgba(6,182,212,0.38);
+        }
+
+        .service-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 0.875rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* FEATURES */
+        .features-wrap {
+            background: var(--bg-2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .features-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem 2.5rem;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--border);
+        }
+
+        .feature-item {
+            padding: 2.75rem 2.25rem;
+            border-right: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .feature-item:last-child { border-right: none; }
+        .feature-item:hover { background: rgba(255,255,255,0.02); }
+
+        .feature-icon {
+            width: 42px; height: 42px;
+            background: rgba(59,130,246,0.1);
+            border: 1px solid rgba(59,130,246,0.18);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-item h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.65;
+            font-weight: 300;
+        }
+
+        /* CONTACT */
+        .contact-wrap {
+            padding: 7rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        .contact-box::before {
             content: '';
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-            top: -200px;
-            left: -200px;
-            animation: float 8s ease-in-out infinite;
+            top: -100px; right: -100px;
+            width: 340px; height: 340px;
+            background: radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
-            bottom: -150px;
-            right: -150px;
-            animation: float 10s ease-in-out infinite reverse;
-        }
+        .contact-text .section-title { margin-bottom: 0.75rem; }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(50px, 50px) scale(1.1); }
-        }
-
-        .hero-content {
-            max-width: 800px;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero .tagline {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.4s backwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            animation: fadeInUp 0.8s ease-out 0.6s backwards;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-        }
-
-        .cta-button:active {
-            transform: translateY(-1px);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            margin-bottom: 3rem;
-            color: var(--text-light);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: rgba(42, 53, 68, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 24px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-cyan);
-        }
-
-        .service-card p {
-            color: var(--text-gray);
-            line-height: 1.8;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 5rem 2rem;
-            background: rgba(26, 35, 50, 0.5);
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-item .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-blue);
-            display: block;
-        }
-
-        .feature-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-        }
-
-        .feature-item p {
-            color: var(--text-gray);
+        .contact-text p {
+            color: var(--muted);
             font-size: 0.95rem;
+            line-height: 1.75;
+            font-weight: 300;
         }
 
-        /* Contact Section */
-        .contact {
-            padding: 5rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact > p {
-            margin-bottom: 2rem;
-            color: var(--text-gray);
-            font-size: 1.1rem;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            padding: 1.5rem;
-            background: rgba(42, 53, 68, 0.6);
-            border-radius: 20px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-cyan);
-        }
-
-        .contact-item h4 {
-            color: var(--accent-cyan);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-item p {
-            color: var(--text-gray);
-        }
-
-        .contact-item a {
-            color: var(--text-gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            color: var(--accent-cyan);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-dark);
+        .contact-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            transition: border-color 0.25s;
         }
 
-        footer p {
-            color: var(--text-gray);
+        .contact-card:hover { border-color: var(--border-hover); }
+
+        .contact-card-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
         }
 
-        /* Responsive */
+        .contact-card a {
+            font-size: 1.15rem;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .contact-card a:hover { color: var(--cyan); }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 1.75rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        footer p { color: var(--muted); font-size: 0.8rem; }
+
+        .footer-mono {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--muted);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .service-card:nth-child(3n) { border-right: 1px solid var(--border); }
+            .service-card:nth-child(2n) { border-right: none; }
+            .service-card:nth-child(n+4) { border-bottom: 1px solid var(--border); }
+            .service-card:nth-child(n+5) { border-bottom: none; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .feature-item:nth-child(2) { border-right: none; }
+            .feature-item:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+            .feature-item:nth-child(4) { border-right: none; border-top: 1px solid var(--border); }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(26, 35, 50, 0.98);
+                top: calc(100% + 8px);
+                left: 0; right: 0;
+                background: rgba(8,13,22,0.97);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 0.75rem;
                 flex-direction: column;
-                padding: 2rem;
-                gap: 1rem;
-                border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+                align-items: stretch;
             }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(8px, 8px);
-            }
-
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(7px, -7px);
-            }
-
-            .services-grid,
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                min-height: 80vh;
-            }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 0.65rem 1rem; }
+            .nav-cta { margin-left: 0; margin-top: 0.25rem; text-align: center; }
+            .menu-toggle { display: flex; }
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+            .contact-box { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+            footer { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
 
-        @media (max-width: 480px) {
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .services,
-            .features,
-            .contact {
-                padding: 3rem 1rem;
-            }
+        @media (max-width: 580px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { border-right: none !important; }
+            .service-card:not(:last-child) { border-bottom: 1px solid var(--border) !important; }
+            .service-card:last-child { border-bottom: none !important; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-item { border-right: none !important; border-top: 1px solid var(--border); }
+            .feature-item:first-child { border-top: none; }
+            .section { padding: 4rem 1.25rem; }
+            .features-header { padding: 4rem 1.25rem 2rem; }
+            .contact-wrap { padding: 4rem 1.25rem; }
+            nav { padding: 0 1.25rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">
-                <img src="data:image/svg+xml,%3Csvg viewBox='0 0 1200 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231a2332' stroke-width='28' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='14' y='14' width='130' height='130' rx='20' ry='20'/%3E%3Crect x='85' y='85' width='130' height='130' rx='20' ry='20'/%3E%3Cpath d='M 80,80 Q 95,95 110,115 Q 125,135 140,150' stroke-width='26'/%3E%3Cellipse cx='110' cy='115' rx='10' ry='14' fill='%231a2332' stroke='none'/%3E%3C/g%3E%3Ctext x='260' y='180' font-family='Arial' font-size='140' font-weight='700' fill='%231a2332'%3ETwoNet%3C/text%3E%3C/svg%3E" alt="TwoNet Logo" class="logo-img">
-            </div>
-            <button class="menu-toggle" aria-label="Navigation öffnen">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <img src="data:image/svg+xml,%3Csvg viewBox='0 0 1200 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%231a2332' stroke-width='28' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='14' y='14' width='130' height='130' rx='20' ry='20'/%3E%3Crect x='85' y='85' width='130' height='130' rx='20' ry='20'/%3E%3Cpath d='M 80,80 Q 95,95 110,115 Q 125,135 140,150' stroke-width='26'/%3E%3Cellipse cx='110' cy='115' rx='10' ry='14' fill='%231a2332' stroke='none'/%3E%3C/g%3E%3Ctext x='260' y='180' font-family='Arial' font-size='140' font-weight='700' fill='%231a2332'%3ETwoNet%3C/text%3E%3C/svg%3E" alt="TwoNet Logo" class="logo-img">
+        <button class="menu-toggle" aria-label="Navigation öffnen">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#contact" class="nav-cta">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <canvas id="network-canvas"></canvas>
+    <div class="hero-mask"></div>
+    <div class="hero-content">
+        <div class="hero-eyebrow">IT-Infrastruktur &amp; Netzwerklösungen</div>
+        <h1>Wir haben <span>IT</span> im Griff</h1>
+        <p class="hero-sub">Professionelle Netzwerkarchitektur, Cloud-Infrastruktur und IT-Sicherheit — alles aus einer Hand.</p>
+        <div class="hero-actions">
+            <a href="#contact" class="btn-primary">Jetzt starten &rarr;</a>
+            <a href="#services" class="btn-secondary">Services ansehen</a>
         </div>
-    </nav>
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>TwoNet</h1>
-            <p class="tagline">Wir haben IT im Griff</p>
-            <p>Ihre professionelle Lösung für moderne IT-Infrastruktur und sichere Netzwerkkommunikation.</p>
-            <a href="#contact" class="cta-button">Jetzt starten</a>
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div>
+            <div class="stat-num">99<span>.9%</span></div>
+            <div class="stat-label">Verfügbarkeit</div>
         </div>
-    </section>
+        <div>
+            <div class="stat-num">24<span>/7</span></div>
+            <div class="stat-label">Monitoring</div>
+        </div>
+        <div>
+            <div class="stat-num">&lt;<span>1h</span></div>
+            <div class="stat-label">Reaktionszeit</div>
+        </div>
+        <div>
+            <div class="stat-num">100<span>%</span></div>
+            <div class="stat-label">Schweizer Qualität</div>
+        </div>
+    </div>
+</div>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <h2 class="section-title">Unsere Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <span class="service-icon" role="img" aria-label="Sicherheit">🔒</span>
-                <h3>Sichere Netzwerke</h3>
-                <p>Implementierung hochsicherer Netzwerkarchitekturen mit modernsten Verschlüsselungstechnologien und Zugriffskontrollen.</p>
-            </div>
-            <div class="service-card">
-                <span class="service-icon" role="img" aria-label="Cloud">☁️</span>
-                <h3>Cloud Solutions</h3>
-                <p>Maßgeschneiderte Cloud-Infrastrukturen für maximale Flexibilität, Skalierbarkeit und Kosteneffizienz Ihres Unternehmens.</p>
-            </div>
-            <div class="service-card">
-                <span class="service-icon" role="img" aria-label="Schutzschild">🛡️</span>
-                <h3>IT-Security</h3>
-                <p>Umfassende Sicherheitslösungen zum Schutz Ihrer Daten und Systeme vor Cyberbedrohungen und Angriffen.</p>
-            </div>
-            <div class="service-card">
-                <span class="service-icon" role="img" aria-label="Einstellungen">⚙️</span>
-                <h3>Managed Services</h3>
-                <p>Professionelle Verwaltung und Wartung Ihrer IT-Infrastruktur für reibungslose Geschäftsprozesse.</p>
-            </div>
-            <div class="service-card">
-                <span class="service-icon" role="img" aria-label="Diagramm">📊</span>
-                <h3>Monitoring</h3>
-                <p>24/7 Überwachung Ihrer Systeme mit proaktivem Management und sofortiger Reaktion bei Problemen.</p>
-            </div>
-            <div class="service-card">
-                <span class="service-icon" role="img" aria-label="Werkzeug">🔧</span>
-                <h3>Beratung</h3>
-                <p>Expertenberatung für optimale IT-Strategien und digitale Transformation Ihres Unternehmens.</p>
+<!-- SERVICES -->
+<div class="section" id="services">
+    <div class="section-label">// Leistungen</div>
+    <h2 class="section-title">Unsere Services</h2>
+    <p class="section-sub">Von der Netzwerkplanung bis zur täglichen Betreuung — wir liefern verlässliche IT-Lösungen.</p>
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon-wrap">🔒</div>
+            <h3>Sichere Netzwerke</h3>
+            <p>Hochsichere Netzwerkarchitekturen mit modernsten Verschlüsselungstechnologien und präzisen Zugriffskontrollen.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon-wrap">☁️</div>
+            <h3>Cloud Solutions</h3>
+            <p>Maßgeschneiderte Cloud-Infrastrukturen für maximale Flexibilität, Skalierbarkeit und Kosteneffizienz.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon-wrap">🛡️</div>
+            <h3>IT-Security</h3>
+            <p>Umfassende Sicherheitslösungen zum Schutz Ihrer Daten und Systeme vor modernen Cyberbedrohungen.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon-wrap">⚙️</div>
+            <h3>Managed Services</h3>
+            <p>Professionelle Verwaltung und Wartung Ihrer IT-Infrastruktur für reibungslose Geschäftsprozesse.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon-wrap">📊</div>
+            <h3>Monitoring</h3>
+            <p>Rund um die Uhr Überwachung Ihrer Systeme mit proaktivem Management und sofortiger Incident-Response.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon-wrap">🔧</div>
+            <h3>Beratung</h3>
+            <p>Strategische IT-Beratung für optimale Infrastrukturentscheidungen und nachhaltige digitale Transformation.</p>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features-wrap" id="features">
+    <div class="features-header">
+        <div class="section-label">// Warum TwoNet</div>
+        <h2 class="section-title">Vertrauen durch Kompetenz</h2>
+    </div>
+    <div class="features-grid">
+        <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            <h4>Hochperformant</h4>
+            <p>Optimierte Infrastruktur für maximale Geschwindigkeit und minimale Latenz in Ihren Prozessen.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🔐</div>
+            <h4>Safety first</h4>
+            <p>Höchste Standards nach aktuellen Normen — Ihre Daten sind jederzeit zuverlässig geschützt.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">💡</div>
+            <h4>Modern &amp; innovativ</h4>
+            <p>Zukunftsfähige Technologien und Best Practices direkt aus der IT-Industrie.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🤝</div>
+            <h4>Zuverlässiger Partner</h4>
+            <p>24/7 Support, klare Kommunikation und garantierte Verfügbarkeit — immer für Sie da.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+    <div class="contact-box">
+        <div class="contact-text">
+            <div class="section-label">// Kontakt</div>
+            <h2 class="section-title">Bereit loszulegen?</h2>
+            <p>Haben Sie Fragen zu unseren Services oder möchten Sie eine individuelle Lösung besprechen? Wir melden uns schnell zurück.</p>
+        </div>
+        <div>
+            <div class="contact-card">
+                <div class="contact-card-label">📧 &nbsp;E-Mail</div>
+                <a href="mailto:info@twonet.ch">info@twonet.ch</a>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="features-container">
-            <h2 class="section-title">Warum TwoNet?</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <span class="icon" role="img" aria-label="Blitz">⚡</span>
-                    <h4>Schnell</h4>
-                    <p>Hochperformante Lösungen für maximale Effizienz</p>
-                </div>
-                <div class="feature-item">
-                    <span class="icon" role="img" aria-label="Schloss">🔐</span>
-                    <h4>Sicher</h4>
-                    <p>Höchste Sicherheitsstandards für Ihre Daten</p>
-                </div>
-                <div class="feature-item">
-                    <span class="icon" role="img" aria-label="Glühbirne">💡</span>
-                    <h4>Innovativ</h4>
-                    <p>Modernste Technologien und Best Practices</p>
-                </div>
-                <div class="feature-item">
-                    <span class="icon" role="img" aria-label="Handschlag">🤝</span>
-                    <h4>Zuverlässig</h4>
-                    <p>24/7 Support und garantierte Verfügbarkeit</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 TwoNet. Alle Rechte vorbehalten.</p>
+    <span class="footer-mono">Wohlen, Aargau · CH</span>
+</footer>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2 class="section-title">Kontaktieren Sie uns</h2>
-        <p>Haben Sie Fragen oder möchten Sie mehr über unsere Services erfahren? Wir sind für Sie da!</p>
-        <div class="contact-info">
-            <div class="contact-item">
-                <h4><span role="img" aria-label="Email">📧</span> Email</h4>
-                <p><a href="mailto:info@twonet.ch">info@twonet.ch</a></p>
-            </div>
-        </div>
-    </section>
+<script>
+// Mobile Menu
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks   = document.querySelector('.nav-links');
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+});
+document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+}));
+document.addEventListener('click', e => {
+    if (!e.target.closest('nav')) {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+    }
+});
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 TwoNet. Alle Rechte vorbehalten.</p>
-    </footer>
+// Network Canvas
+const canvas = document.getElementById('network-canvas');
+const ctx    = canvas.getContext('2d');
+let W, H, nodes;
+const mouse = { x: -9999, y: -9999 };
+const N = 55, DIST = 155, SPD = 0.4;
 
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+}
 
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+function mkNodes() {
+    nodes = Array.from({ length: N }, () => ({
+        x:  Math.random() * W,
+        y:  Math.random() * H,
+        vx: (Math.random() - 0.5) * SPD * 2,
+        vy: (Math.random() - 0.5) * SPD * 2,
+        r:  Math.random() * 2.5 + 1.5,
+        pulse: Math.random() * Math.PI * 2,
+        ps:    Math.random() * 0.03 + 0.015,
+        hue: Math.random() > 0.5 ? 200 : 186,
+    }));
+}
 
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
+let packets = [];
+function trySpawn(x1, y1, x2, y2) {
+    if (Math.random() > 0.004) return;
+    packets.push({ x1, y1, x2, y2, t: 0, spd: Math.random() * 0.012 + 0.005 });
+}
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('nav')) {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
+function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    nodes.forEach(n => {
+        n.x += n.vx; n.y += n.vy; n.pulse += n.ps;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+        const dx = n.x - mouse.x, dy = n.y - mouse.y;
+        const d  = Math.hypot(dx, dy);
+        if (d < 110 && d > 0) {
+            const f = (110 - d) / 110;
+            n.vx += (dx / d) * f * 0.35;
+            n.vy += (dy / d) * f * 0.35;
+            const sp = Math.hypot(n.vx, n.vy);
+            if (sp > 2.8) { n.vx = n.vx / sp * 2.8; n.vy = n.vy / sp * 2.8; }
+        }
+    });
+
+    for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i], b = nodes[j];
+            const d = Math.hypot(a.x - b.x, a.y - b.y);
+            if (d < DIST) {
+                const alpha = (1 - d / DIST) * 0.45;
+                const g = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+                g.addColorStop(0, `hsla(${a.hue},75%,60%,${alpha})`);
+                g.addColorStop(1, `hsla(${b.hue},75%,60%,${alpha})`);
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+                ctx.strokeStyle = g; ctx.lineWidth = 1; ctx.stroke();
+                trySpawn(a.x, a.y, b.x, b.y);
             }
-        });
-    </script>
+        }
+    }
+
+    packets = packets.filter(p => p.t <= 1);
+    packets.forEach(p => {
+        p.t += p.spd;
+        const x = p.x1 + (p.x2 - p.x1) * p.t;
+        const y = p.y1 + (p.y2 - p.y1) * p.t;
+        const gr = ctx.createRadialGradient(x, y, 0, x, y, 7);
+        gr.addColorStop(0, 'rgba(6,182,212,0.7)');
+        gr.addColorStop(1, 'rgba(6,182,212,0)');
+        ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2);
+        ctx.fillStyle = gr; ctx.fill();
+        ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff'; ctx.fill();
+    });
+
+    nodes.forEach(n => {
+        const pr = n.r * (1 + 0.2 * Math.sin(n.pulse));
+        const gr = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, pr * 5);
+        gr.addColorStop(0, `hsla(${n.hue},85%,65%,0.22)`);
+        gr.addColorStop(1, `hsla(${n.hue},85%,65%,0)`);
+        ctx.beginPath(); ctx.arc(n.x, n.y, pr * 5, 0, Math.PI * 2);
+        ctx.fillStyle = gr; ctx.fill();
+        ctx.beginPath(); ctx.arc(n.x, n.y, pr, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${n.hue},80%,70%,0.85)`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', () => { resize(); mkNodes(); });
+canvas.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+});
+canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+resize(); mkNodes(); draw();
+</script>
 </body>
 </html>
-
-
