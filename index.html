@@ -1082,7 +1082,7 @@
     <div class="nav-inner" id="navInner">
         <a href="#home" class="logo-wrap">
             <div class="logo-img-placeholder">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA1AAAAEdCAYAAAACQoaqAACQdElEQVR4nO29d5hsa1mnfXcOO5xIOgdQEBEVFTANpkFURBFGhZFRRNGRUVFgTChmRkwgKIoYMKPjKIIBAwoKKiIOYEBB8iBwOHDCPufs0L27u7r6++NZv+991trVXat3ra6u6v7d11VX5VWr1lrv+z77mdnZ2cEYY4wxxhhjzHBmD3sHjDHGGGOMMWZasAJljDHGGGOMMS2xAmWMMcYYY4wxLbECZYwxxhhjjDEtsQJljDHGGGOMMS2xAmWMMcYYY4wxLbECZYwxxhhjjDEtsQJljDHGGGOMMS2xAmWMMcYYY4wxLbECZYwxxhhjjDEtsQJljDHGGGOMMS2xAmWMMcYYY4wxLbECZYwxxhhjjDEtsQJljDHGGGOMMS2xAmWMMcYYY4wxLbECZYwxxhhjjDEtsQLVjs0Br23j42eMMcYYY8yxwgrAcJaBxepxv7qfBeYOZ3eMMcYYY4wxh4UVqOFcBHaqxwuN9/oYY4wxxhhjjg1WoNqx2Hjeq+59/IwxxhhjjDlGWAEYzgniOJ1Lr81X91vj3x1jjDHGGGPMYTE//CPHnv8DfFH1eBPYIPKiFrg0pM8YY4wxxhhjjjBWoIazQgnjuqfaP0iVM6Cf3oX+x0N+5cVX6lf5yAeKq2fKEI1NiXCW11JuBH5Gzm+sMIrUcLHqsYY4kxrFKqTaY+tOr78S3GRyrSPJA4kbkMiECsEcZzlX5NtiKqUqPfXDFjEKq9Sy9dPE6Lx23VJe/z5jqzYqFEGKzXJB6ZZzU1Qvt5cBXAAAEoklEQVQF4BHAi8AnAGcEZGFJz6mmekfXRTH6FJE0TH7a7CrCHbNSwABNIzjD2vM9O26APBNzxOFEIZA1ZNyAz2hOsA6iNE0wUJ/KoYFHbYf6VFbRb6Ci+sOu6MeFP7CioYUxpDaqBPQH2Yy5k4VnWcVi4Dxr8=" style="height:36px;width:auto;object-fit:contain;" alt="TwoNet">
+                <img src="TwoNet-Logo.png" style="height:36px;width:auto;object-fit:contain;" alt="TwoNet">
             </div>
         </a>
         <button class="menu-toggle" aria-label="Navigation öffnen">
@@ -1275,7 +1275,7 @@
         <div class="contact-cards">
             <div class="contact-card">
                 <div class="contact-card-label">📧 &nbsp;E-Mail</div>
-                <a href="mailto:info@twonet.ch">info@twonet.ch</a>
+                <a href="/cdn-cgi/l/email-protection#20494e464f6054574f4e45540e4348"><span class="__cf_email__" data-cfemail="bbd2d5ddd4fbcfccd4d5decf95d8d3">[email&#160;protected]</span></a>
             </div>
         </div>
     </div>
@@ -1286,7 +1286,7 @@
     <p>&copy; 2026 TwoNet. Alle Rechte vorbehalten.</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks   = document.querySelector('.nav-links');
 menuToggle.addEventListener('click', () => {
@@ -1423,13 +1423,4 @@ function draw() {
 
 window.addEventListener('resize', () => { resize(); mkNodes(); });
 canvas.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left;
-    mouse.y = e.clientY - r.top;
-});
-canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-
-resize(); mkNodes(); draw();
-</script>
-</body>
-</html>
+    const r = canvas.get
